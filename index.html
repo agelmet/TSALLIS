@@ -37,35 +37,23 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     boxShadow: {
-                        'lux': '0 20px 50px -10px rgba(94, 109, 91, 0.08)',
-                        'float': '0 30px 60px -15px rgba(94, 109, 91, 0.15)',
-                        'glow': '0 0 40px -10px rgba(143, 158, 139, 0.4)',
-                        'deep': '0 40px 80px -20px rgba(44, 51, 42, 0.15)',
+                        'lux': '0 20px 40px -10px rgba(94, 109, 91, 0.08)',
+                        'float': '0 30px 50px -15px rgba(94, 109, 91, 0.12)',
+                        'glow': '0 0 30px -10px rgba(143, 158, 139, 0.3)',
+                        'deep': '0 30px 60px -20px rgba(44, 51, 42, 0.15)',
                     },
                     animation: {
-                        'float-slow': 'float 8s ease-in-out infinite',
-                        'float-delayed': 'float 8s ease-in-out 4s infinite',
                         'scroll-vertical': 'scroll-vertical 40s linear infinite',
-                        'kenburns': 'kenburns 30s ease-out both',
-                        'blob': 'blob 10s infinite alternate',
+                        'kenburns': 'kenburns 40s ease-out both',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
                         'scroll-vertical': {
                             '0%': { transform: 'translateY(0)' },
                             '100%': { transform: 'translateY(-50%)' },
                         },
                         kenburns: {
-                            '0%': { transform: 'scale(1.1) translate(0, 0)' },
+                            '0%': { transform: 'scale(1.05) translate(0, 0)' },
                             '100%': { transform: 'scale(1) translate(-1%, -1%)' },
-                        },
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '50%': { transform: 'translate(20px, -20px) scale(1.05)' },
-                            '100%': { transform: 'translate(-20px, 20px) scale(0.95)' },
                         }
                     }
                 }
@@ -82,17 +70,16 @@
 
         body { background-color: #F4F1EA; color: #4A5048; overflow-x: hidden; }
 
-        /* Reveal Animations */
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        /* Hardware-accelerated Reveal Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
 
-        /* Elegant Hover Effects */
-        .img-wrapper { overflow: hidden; position: relative; }
-        .img-wrapper img { transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        .img-wrapper:hover img { transform: scale(1.04); }
+        /* Efficient Hover Effects */
+        .img-wrapper { overflow: hidden; position: relative; transform: translateZ(0); }
+        .img-wrapper img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; }
+        .img-wrapper:hover img { transform: scale(1.03); }
 
         /* Vertical Marquee Mask */
         .marquee-mask {
@@ -100,55 +87,50 @@
             -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
         }
 
-        /* Glassmorphism Refined */
+        /* Glassmorphism Refined for Performance */
         .glass {
-            background: rgba(244, 241, 234, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(244, 241, 234, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         /* Lightbox */
         #lightbox {
-            opacity: 0; pointer-events: none; transition: opacity 0.5s ease;
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+            background: rgba(44, 51, 42, 0.95);
         }
         #lightbox.active { opacity: 1; pointer-events: auto; }
-        #lightbox img { transform: scale(0.95); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        #lightbox img { transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform; }
         #lightbox.active img { transform: scale(1); }
 
-        /* Hero text reveal */
-        .text-reveal { overflow: hidden; display: inline-block; }
-        .text-reveal span { display: inline-block; transform: translateY(100%); opacity: 0; transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        /* Performance optimized text reveal */
+        .text-reveal { overflow: hidden; display: inline-block; vertical-align: bottom; }
+        .text-reveal span { display: inline-block; transform: translateY(100%); opacity: 0; transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s ease; will-change: transform, opacity; }
         .reveal.active .text-reveal span { transform: translateY(0); opacity: 1; }
-        .text-reveal-delay { transition-delay: 0.2s !important; }
+        .text-reveal-delay { transition-delay: 0.15s !important; }
 
         /* Services Grid Lines */
         .service-bg-lines {
-            background-image: linear-gradient(rgba(143, 158, 139, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(143, 158, 139, 0.1) 1px, transparent 1px);
+            background-image: linear-gradient(rgba(143, 158, 139, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(143, 158, 139, 0.08) 1px, transparent 1px);
             background-size: 40px 40px;
         }
     </style>
 
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 <body class="antialiased selection:bg-brand-sage selection:text-white">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-500" id="navbar">
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="glass rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-sm transition-all duration-500 hover:shadow-md border border-white/60">
+            <div class="glass rounded-full flex justify-between items-center px-6 md:px-8 py-3 transition-shadow duration-300 border border-white/60">
                 
-                <!-- Enhanced Logo / Title -->
-                <a href="#" class="flex items-center gap-3 md:gap-4 group">
-                    <div class="hidden sm:flex w-11 h-11 rounded-full border border-brand-sage/40 items-center justify-center group-hover:border-brand-forest group-hover:bg-brand-sage/5 transition-all duration-500 shadow-sm">
-                        <span class="font-serif italic text-xl text-brand-forest">Η</span>
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <span class="font-serif text-lg md:text-xl tracking-[0.15em] text-brand-dark uppercase leading-none mb-1 group-hover:text-brand-forest transition-colors">Ηλιας Τσαλλης</span>
-                        <span class="text-[8px] md:text-[9px] tracking-[0.25em] text-brand-sage uppercase font-semibold leading-none">Συστημικος Ψυχοθεραπευτης</span>
-                    </div>
+                <!-- Logo / Title -->
+                <a href="#" class="flex flex-col justify-center group">
+                    <span class="font-serif text-lg md:text-xl tracking-[0.15em] text-brand-dark uppercase leading-none mb-1 group-hover:text-brand-forest transition-colors">Ηλιας Τσαλλης</span>
+                    <span class="text-[8px] md:text-[9px] tracking-[0.25em] text-brand-sage uppercase font-semibold leading-none">Συστημικος Ψυχοθεραπευτης</span>
                 </a>
                 
                 <div class="hidden lg:flex items-center space-x-10">
@@ -156,17 +138,17 @@
                     <a href="#services" class="text-xs font-semibold tracking-widest uppercase text-brand-dark hover:text-brand-sage transition-colors">ΥΠΗΡΕΣΙΕΣ</a>
                     <a href="#philosophy" class="text-xs font-semibold tracking-widest uppercase text-brand-dark hover:text-brand-sage transition-colors">ΦΙΛΟΣΟΦΙΑ</a>
                     <a href="#space" class="text-xs font-semibold tracking-widest uppercase text-brand-dark hover:text-brand-sage transition-colors">ΧΩΡΟΣ</a>
-                    <a href="#contact" class="px-8 py-3.5 bg-brand-forest text-white rounded-full text-xs font-bold tracking-widest uppercase hover:bg-brand-dark hover:scale-105 transition-all duration-500 shadow-lux hover:shadow-glow">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</a>
+                    <a href="#contact" class="px-8 py-3 bg-brand-forest text-white rounded-full text-xs font-bold tracking-widest uppercase hover:bg-brand-dark hover:-translate-y-0.5 transition-transform duration-300 shadow-lux">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</a>
                 </div>
 
-                <button class="lg:hidden text-brand-dark focus:outline-none p-2" id="mobile-menu-btn">
+                <button class="lg:hidden text-brand-dark focus:outline-none p-2" id="mobile-menu-btn" aria-label="Toggle Menu">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brand-beige/95 backdrop-blur-xl hidden flex-col items-center py-10 space-y-8 border-t border-brand-sand shadow-lux">
+        <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brand-beige/98 backdrop-blur-md hidden flex-col items-center py-10 space-y-8 border-t border-brand-sand shadow-lux">
             <a href="#about" class="text-lg font-serif text-brand-dark mobile-link">Η Προσέγγιση</a>
             <a href="#services" class="text-lg font-serif text-brand-dark mobile-link">Υπηρεσίες</a>
             <a href="#philosophy" class="text-lg font-serif text-brand-dark mobile-link">Φιλοσοφία</a>
@@ -177,66 +159,60 @@
 
     <!-- Hero Section -->
     <section class="relative min-h-[100svh] flex items-center pt-32 pb-20 overflow-hidden bg-brand-beige">
-        <!-- Animated Background Layer -->
+        <!-- Optimized Background Layer -->
         <div class="absolute inset-0 z-0 overflow-hidden">
-            <div class="absolute inset-0 bg-[url('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis1.jpg')] bg-cover bg-center opacity-[0.25] animate-kenburns mix-blend-multiply"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-beige via-brand-beige/95 to-brand-beige/60"></div>
-            <!-- Ambient glowing blobs -->
-            <div class="absolute top-[20%] right-[10%] w-[40vw] h-[40vw] bg-brand-sage/20 rounded-full blur-[100px] animate-blob mix-blend-multiply"></div>
-            <div class="absolute bottom-[10%] left-[20%] w-[50vw] h-[50vw] bg-brand-sand/40 rounded-full blur-[120px] animate-blob animation-delay-4000 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-[url('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis1.jpg')] bg-cover bg-center opacity-40 animate-kenburns" style="will-change: transform;"></div>
+            <!-- Gradient to ensure text readability while keeping image visible -->
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-beige/80 via-brand-beige/60 to-brand-beige/95 lg:from-brand-beige/30 lg:via-brand-beige/70 lg:to-brand-beige"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
             
-            <!-- Left: Portrait (Breathtaking effects) -->
-            <div class="order-2 lg:order-1 relative reveal h-[500px] lg:h-[750px] w-full flex justify-center lg:justify-start">
-                <!-- Floating geometric accents -->
-                <div class="absolute w-[75%] h-[95%] bg-gradient-to-br from-brand-sand to-transparent rounded-[3rem] rotate-3 top-6 left-10 z-0 opacity-70"></div>
-                <div class="absolute w-[80%] h-[90%] border border-brand-sage/30 rounded-[3rem] -rotate-3 top-4 left-4 z-0"></div>
+            <!-- Left: Portrait -->
+            <div class="order-2 lg:order-1 relative reveal h-[450px] sm:h-[550px] lg:h-[700px] w-full flex justify-center lg:justify-start">
+                <!-- Static geometric accent for performance -->
+                <div class="absolute w-[80%] h-[90%] border border-brand-sage/50 rounded-[3rem] -rotate-3 top-4 left-4 z-0 bg-brand-sand/20"></div>
                 
                 <!-- Main Image Wrapper -->
                 <div class="relative z-10 w-[85%] h-[95%] mt-auto rounded-t-full rounded-b-[2.5rem] overflow-hidden shadow-deep img-wrapper bg-brand-sand">
-                    <!-- Inner glow / overlay -->
-                    <div class="absolute inset-0 shadow-[inset_0_0_40px_rgba(44,51,42,0.1)] z-10 pointer-events-none"></div>
-                    <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/ts5.jpg" alt="Ηλίας Τσάλλης - Ψυχολόγος" class="w-full h-full object-cover object-top scale-100 origin-bottom transition-transform duration-[2s] hover:scale-105">
+                    <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/ts5.jpg" alt="Ηλίας Τσάλλης - Ψυχολόγος" class="w-full h-full object-cover object-top scale-100 origin-bottom transition-transform duration-1000 hover:scale-105">
                 </div>
                 
-                <!-- Floating Glass Badge -->
-                <div class="absolute bottom-16 right-0 lg:-right-12 z-20 glass p-5 rounded-3xl shadow-glow flex items-center gap-5 animate-float-slow border-white/60">
-                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-forest to-brand-sage flex items-center justify-center text-white shadow-inner">
-                        <i data-lucide="shield-check" class="w-7 h-7"></i>
+                <!-- Floating Glass Badge (Optimized) -->
+                <div class="absolute bottom-10 right-2 lg:-right-8 z-20 glass p-4 rounded-2xl shadow-glow flex items-center gap-4 border-white/60 transform hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-brand-forest flex items-center justify-center text-white">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
                     <div>
                         <p class="text-sm font-bold text-brand-dark tracking-wide">BSc, S.A.N.E.</p>
-                        <p class="text-xs text-brand-forest font-medium tracking-wider mt-0.5">Μέλος BPS & ΕΛΕΣΥΘ</p>
+                        <p class="text-[11px] text-brand-forest font-semibold tracking-wider mt-0.5">Μέλος BPS & ΕΛΕΣΥΘ</p>
                     </div>
                 </div>
             </div>
 
             <!-- Right: Content -->
-            <div class="order-1 lg:order-2 reveal delay-200">
-                <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full border border-brand-sage/40 text-brand-forest text-xs font-bold tracking-[0.2em] uppercase mb-8 bg-white/40 backdrop-blur-sm shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-brand-sage animate-pulse"></span>
+            <div class="order-1 lg:order-2 reveal delay-100">
+                <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full border border-brand-sage/30 text-brand-forest text-xs font-bold tracking-[0.2em] uppercase mb-8 bg-white/60 backdrop-blur-sm shadow-sm">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-sage"></span>
                     Ιδιωτικο Γραφειο Περιστερι
                 </div>
                 
-                <h1 class="text-5xl lg:text-7xl font-serif text-brand-dark leading-[1.1] mb-8">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif text-brand-dark leading-[1.1] mb-6">
                     <span class="text-reveal"><span>Ψυχοθεραπεία που</span></span><br>
                     <span class="text-reveal text-reveal-delay"><span>εστιάζει στην</span></span><br>
                     <span class="text-reveal text-reveal-delay"><span class="italic text-brand-forest">Ασφάλεια του Δεσμού.</span></span>
                 </h1>
                 
-                <p class="text-lg md:text-xl text-brand-text mb-12 max-w-lg leading-relaxed font-light opacity-90">
+                <p class="text-base sm:text-lg text-brand-text mb-10 max-w-lg leading-relaxed font-light">
                     Δημιουργούμε μαζί έναν χώρο απόλυτης αποδοχής. Εδώ, κάθε συναίσθημα αποκτά φωνή και κάθε πρόκληση γίνεται το θεμέλιο για την ουσιαστική σας εξέλιξη.
                 </p>
                 
-                <div class="flex flex-wrap items-center gap-5">
-                    <a href="#contact" class="px-8 py-4 bg-brand-dark text-white rounded-full text-sm font-bold tracking-widest uppercase hover:bg-brand-sage hover:-translate-y-1 transition-all duration-500 shadow-lux hover:shadow-glow flex items-center gap-3 group relative overflow-hidden">
-                        <span class="relative z-10">ΚΛΕΙΣΤΕ ΣΥΝΕΔΡΙΑ</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform"></i>
-                        <div class="absolute inset-0 bg-gradient-to-r from-brand-forest to-brand-sage opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="#contact" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-brand-dark text-white rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase hover:bg-brand-sage hover:-translate-y-1 transition-all duration-300 shadow-lux flex items-center gap-3 group">
+                        ΚΛΕΙΣΤΕ ΣΥΝΕΔΡΙΑ
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="#about" class="px-8 py-4 bg-transparent border border-brand-dark/30 text-brand-dark rounded-full text-sm font-bold tracking-widest uppercase hover:border-brand-dark hover:bg-brand-dark/5 transition-all duration-300 backdrop-blur-sm">
+                    <a href="#about" class="px-6 sm:px-8 py-3.5 sm:py-4 bg-white/50 border border-brand-dark/20 text-brand-dark rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase hover:border-brand-dark hover:bg-white transition-all duration-300">
                         ΓΝΩΡΙΣΤΕ ΜΕ
                     </a>
                 </div>
@@ -245,13 +221,13 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-32 px-6 bg-white relative">
+    <section id="about" class="py-24 lg:py-32 px-6 bg-white relative">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
             
             <div class="lg:col-span-7 reveal">
-                <h2 class="text-4xl lg:text-5xl font-serif text-brand-dark mb-10 leading-tight">Συστημική Ψυχοθεραπεία:<br><span class="italic text-brand-forest">Ανακαλύπτοντας τον Εαυτό μέσα από τις Σχέσεις</span></h2>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif text-brand-dark mb-8 leading-tight">Συστημική Ψυχοθεραπεία:<br><span class="italic text-brand-forest">Ανακαλύπτοντας τον Εαυτό μέσα από τις Σχέσεις</span></h2>
                 
-                <div class="space-y-6 text-lg text-brand-text font-light leading-relaxed">
+                <div class="space-y-6 text-base sm:text-lg text-brand-text font-light leading-relaxed">
                     <p>
                         Ο <strong>Ηλίας Τσάλλης</strong> είναι αδειούχος Ψυχολόγος (Αρ. Αδείας: 3577/2020) και Συστημικός Ψυχοθεραπευτής, διατηρώντας το ιδιωτικό του γραφείο στο Περιστέρι. Η ακαδημαϊκή του ταυτότητα εδράζεται στα υψηλά βρετανικά πρότυπα εκπαίδευσης: είναι κάτοχος πτυχίου Ψυχολογίας (BSc in Psychology) από το <strong>University of East London</strong> και περήφανο μέλος της έγκριτης <strong>Βρετανικής Εταιρείας Ψυχολόγων (BPS)</strong>.
                     </p>
@@ -264,116 +240,90 @@
                 </div>
             </div>
 
-            <div class="lg:col-span-5 relative reveal delay-200">
-                <div class="aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-deep img-wrapper animate-float-slow border-[8px] border-brand-beige">
+            <div class="lg:col-span-5 relative reveal delay-100">
+                <div class="aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-deep img-wrapper border-[6px] border-brand-beige">
                     <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/ts2.jpg" alt="Ηλίας Τσάλλης Πορτρέτο" class="w-full h-full object-cover">
                 </div>
-                <!-- Decorative Elements -->
-                <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-gradient-to-tr from-brand-sage/20 to-transparent rounded-full blur-2xl -z-10 animate-blob"></div>
-                <div class="absolute -top-10 -left-10 w-40 h-40 bg-brand-sand/60 rounded-full blur-xl -z-10 animate-blob" style="animation-delay: 2s;"></div>
+                <!-- Static Decorative Elements (Optimized) -->
+                <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-brand-sage/20 rounded-full blur-2xl -z-10"></div>
+                <div class="absolute -top-8 -left-8 w-32 h-32 bg-brand-sand/50 rounded-full blur-xl -z-10"></div>
             </div>
 
         </div>
     </section>
 
-    <!-- Services Section (Wow & Minimal) -->
-    <section id="services" class="py-32 px-6 relative bg-brand-beige service-bg-lines overflow-hidden">
-        
-        <!-- Ambient Background Glow for Services -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] bg-white/40 rounded-full blur-[150px] z-0 pointer-events-none"></div>
-
+    <!-- Services Section -->
+    <section id="services" class="py-24 lg:py-32 px-6 relative bg-brand-beige service-bg-lines overflow-hidden">
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-24 reveal">
+            <div class="text-center mb-16 lg:mb-24 reveal">
                 <span class="text-brand-forest font-bold tracking-[0.2em] text-xs uppercase mb-4 block">ΠΡΟΣΕΓΓΙΣΗ & ΥΠΗΡΕΣΙΕΣ</span>
-                <h2 class="text-4xl md:text-6xl font-serif text-brand-dark mb-6">Πώς Μπορούμε να Συνεργαστούμε</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-brand-sage to-transparent mx-auto"></div>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-brand-dark mb-6">Πώς Μπορούμε να Συνεργαστούμε</h2>
+                <div class="w-16 h-1 bg-brand-sage mx-auto rounded-full"></div>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-10">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-10">
                 
                 <!-- Service 1 -->
-                <div class="group relative p-[1px] rounded-[2.5rem] bg-gradient-to-b from-brand-sand/60 to-transparent hover:from-brand-sage transition-all duration-700 reveal shadow-sm hover:shadow-glow">
-                    <div class="bg-white/90 backdrop-blur-xl p-10 md:p-12 rounded-[2.5rem] h-full transform transition-transform duration-700 group-hover:-translate-y-2 relative overflow-hidden">
-                        <!-- Hover subtle background shift -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-brand-beige/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        
-                        <div class="relative z-10">
-                            <div class="w-16 h-16 bg-brand-beige rounded-2xl flex items-center justify-center mb-8 border border-brand-sand group-hover:scale-110 transition-transform duration-500 shadow-inner">
-                                <i data-lucide="user" class="w-7 h-7 text-brand-forest group-hover:text-brand-dark transition-colors"></i>
-                            </div>
-                            <h3 class="text-2xl font-serif font-semibold text-brand-dark mb-2">Ατομική Ψυχοθεραπεία Ενηλίκων</h3>
-                            <h4 class="text-brand-sage font-medium tracking-wide mb-6">Άγχος, Στρες & Αυτογνωσία</h4>
-                            <p class="text-brand-text font-light leading-relaxed mb-8">
-                                Η καθημερινότητα συχνά μας "υπερφορτώνει" με στρες, άγχος και αίσθημα αδιεξόδου. Στις ατομικές συνεδρίες των 50 λεπτών, δουλεύουμε συνεργατικά για να αποκωδικοποιήσουμε αυτά τα συναισθήματα. Δεν εστιάζουμε μόνο στο σύμπτωμα, αλλά στον τρόπο που αντιλαμβάνεστε τον εαυτό σας και τον κόσμο γύρω σας, βοηθώντας σας να χτίσετε ψυχική ανθεκτικότητα.
-                            </p>
-                            <div class="flex flex-wrap gap-3 mt-auto">
-                                <span class="px-4 py-1.5 bg-white border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-full shadow-sm">Συνεδρία 50'</span>
-                                <span class="px-4 py-1.5 bg-white border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-full shadow-sm">Άγχος & Στρες</span>
-                            </div>
-                        </div>
+                <div class="group bg-white p-8 sm:p-10 rounded-[2.5rem] reveal shadow-sm hover:shadow-lux transition-all duration-300 border border-brand-sand/50 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-brand-beige rounded-2xl flex items-center justify-center mb-6 border border-brand-sand group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="user" class="w-6 h-6 text-brand-forest"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-semibold text-brand-dark mb-2">Ατομική Ψυχοθεραπεία Ενηλίκων</h3>
+                    <h4 class="text-brand-sage font-medium tracking-wide mb-4">Άγχος, Στρες & Αυτογνωσία</h4>
+                    <p class="text-brand-text font-light leading-relaxed mb-8">
+                        Η καθημερινότητα συχνά μας "υπερφορτώνει" με στρες, άγχος και αίσθημα αδιεξόδου. Στις ατομικές συνεδρίες των 50 λεπτών, δουλεύουμε συνεργατικά για να αποκωδικοποιήσουμε αυτά τα συναισθήματα. Δεν εστιάζουμε μόνο στο σύμπτωμα, αλλά στον τρόπο που αντιλαμβάνεστε τον εαυτό σας και τον κόσμο γύρω σας, βοηθώντας σας να χτίσετε ψυχική ανθεκτικότητα.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1.5 bg-brand-beige border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-md">Συνεδρία 50'</span>
+                        <span class="px-3 py-1.5 bg-brand-beige border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-md">Άγχος & Στρες</span>
                     </div>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="group relative p-[1px] rounded-[2.5rem] bg-gradient-to-b from-brand-sand/60 to-transparent hover:from-brand-sage transition-all duration-700 reveal delay-100 shadow-sm hover:shadow-glow lg:translate-y-12">
-                    <div class="bg-white/90 backdrop-blur-xl p-10 md:p-12 rounded-[2.5rem] h-full transform transition-transform duration-700 group-hover:-translate-y-2 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-brand-beige/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <div class="relative z-10">
-                            <div class="w-16 h-16 bg-brand-beige rounded-2xl flex items-center justify-center mb-8 border border-brand-sand group-hover:scale-110 transition-transform duration-500 shadow-inner">
-                                <i data-lucide="heart-handshake" class="w-7 h-7 text-brand-forest group-hover:text-brand-dark transition-colors"></i>
-                            </div>
-                            <h3 class="text-2xl font-serif font-semibold text-brand-dark mb-2">Θεραπεία Ζεύγους</h3>
-                            <h4 class="text-brand-sage font-medium tracking-wide mb-6">Διαπροσωπικές Σχέσεις</h4>
-                            <p class="text-brand-text font-light leading-relaxed mb-8">
-                                Η συντροφικότητα είναι ένας ζωντανός οργανισμός που διαρκώς δοκιμάζεται. Όταν η επικοινωνία διακόπτεται και οι συγκρούσεις γίνονται καθημερινότητα, η Συστημική Θεραπεία προσφέρει ένα ασφαλές, ουδέτερο έδαφος. Βοηθάμε τους συντρόφους να "ακούσουν" πραγματικά ο ένας τον άλλον, να αναγνωρίσουν τα δυσλειτουργικά μοτίβα και να επανασυνδεθούν.
-                            </p>
-                            <div class="flex flex-wrap gap-3 mt-auto">
-                                <span class="px-4 py-1.5 bg-white border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-full shadow-sm">Συνεδρία 50'</span>
-                                <span class="px-4 py-1.5 bg-white border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-full shadow-sm">Προβλήματα Σχέσεων</span>
-                            </div>
-                        </div>
+                <div class="group bg-white p-8 sm:p-10 rounded-[2.5rem] reveal delay-100 shadow-sm hover:shadow-lux transition-all duration-300 border border-brand-sand/50 hover:-translate-y-1 lg:translate-y-8">
+                    <div class="w-14 h-14 bg-brand-beige rounded-2xl flex items-center justify-center mb-6 border border-brand-sand group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="heart-handshake" class="w-6 h-6 text-brand-forest"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-semibold text-brand-dark mb-2">Θεραπεία Ζεύγους</h3>
+                    <h4 class="text-brand-sage font-medium tracking-wide mb-4">Διαπροσωπικές Σχέσεις</h4>
+                    <p class="text-brand-text font-light leading-relaxed mb-8">
+                        Η συντροφικότητα είναι ένας ζωντανός οργανισμός που διαρκώς δοκιμάζεται. Όταν η επικοινωνία διακόπτεται και οι συγκρούσεις γίνονται καθημερινότητα, η Συστημική Θεραπεία προσφέρει ένα ασφαλές, ουδέτερο έδαφος. Βοηθάμε τους συντρόφους να "ακούσουν" πραγματικά ο ένας τον άλλον, να αναγνωρίσουν τα δυσλειτουργικά μοτίβα και να επανασυνδεθούν.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1.5 bg-brand-beige border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-md">Συνεδρία 50'</span>
+                        <span class="px-3 py-1.5 bg-brand-beige border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-md">Προβλήματα Σχέσεων</span>
                     </div>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="group relative p-[1px] rounded-[2.5rem] bg-gradient-to-b from-brand-sand/60 to-transparent hover:from-brand-sage transition-all duration-700 reveal shadow-sm hover:shadow-glow">
-                    <div class="bg-white/90 backdrop-blur-xl p-10 md:p-12 rounded-[2.5rem] h-full transform transition-transform duration-700 group-hover:-translate-y-2 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-brand-beige/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <div class="relative z-10">
-                            <div class="w-16 h-16 bg-brand-beige rounded-2xl flex items-center justify-center mb-8 border border-brand-sand group-hover:scale-110 transition-transform duration-500 shadow-inner">
-                                <i data-lucide="home" class="w-7 h-7 text-brand-forest group-hover:text-brand-dark transition-colors"></i>
-                            </div>
-                            <h3 class="text-2xl font-serif font-semibold text-brand-dark mb-2">Οικογενειακή Θεραπεία</h3>
-                            <h4 class="text-brand-sage font-medium tracking-wide mb-6">Συμβουλευτική Γονέων</h4>
-                            <p class="text-brand-text font-light leading-relaxed mb-8">
-                                Η οικογένεια είναι το πρώτο και ισχυρότερο σύστημα στο οποίο ανήκουμε. Παρέχεται εξειδικευμένη θεραπεία για την εξομάλυνση των εντάσεων. Παράλληλα, μέσω της Συμβουλευτικής Γονέων, υποστηρίζουμε τους γονείς να διαχειριστούν τις προκλήσεις της ανατροφής, να θέσουν υγιή όρια και να χτίσουν σχέση εμπιστοσύνης με τα παιδιά.
-                            </p>
-                            <div class="flex flex-wrap gap-3 mt-auto">
-                                <span class="px-4 py-1.5 bg-white border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-full shadow-sm">Οικογενειακή 50'</span>
-                                <span class="px-4 py-1.5 bg-white border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-full shadow-sm">Συμβουλευτική Γονέων</span>
-                            </div>
-                        </div>
+                <div class="group bg-white p-8 sm:p-10 rounded-[2.5rem] reveal shadow-sm hover:shadow-lux transition-all duration-300 border border-brand-sand/50 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-brand-beige rounded-2xl flex items-center justify-center mb-6 border border-brand-sand group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="home" class="w-6 h-6 text-brand-forest"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-semibold text-brand-dark mb-2">Οικογενειακή Θεραπεία</h3>
+                    <h4 class="text-brand-sage font-medium tracking-wide mb-4">Συμβουλευτική Γονέων</h4>
+                    <p class="text-brand-text font-light leading-relaxed mb-8">
+                        Η οικογένεια είναι το πρώτο και ισχυρότερο σύστημα στο οποίο ανήκουμε. Παρέχεται εξειδικευμένη θεραπεία για την εξομάλυνση των εντάσεων. Παράλληλα, μέσω της Συμβουλευτικής Γονέων, υποστηρίζουμε τους γονείς να διαχειριστούν τις προκλήσεις της ανατροφής, να θέσουν υγιή όρια και να χτίσουν σχέση εμπιστοσύνης με τα παιδιά.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1.5 bg-brand-beige border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-md">Οικογενειακή 50'</span>
+                        <span class="px-3 py-1.5 bg-brand-beige border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-md">Συμβουλευτική Γονέων</span>
                     </div>
                 </div>
 
                 <!-- Service 4 -->
-                <div class="group relative p-[1px] rounded-[2.5rem] bg-gradient-to-b from-brand-sand/60 to-transparent hover:from-brand-sage transition-all duration-700 reveal delay-100 shadow-sm hover:shadow-glow lg:translate-y-12">
-                    <div class="bg-white/90 backdrop-blur-xl p-10 md:p-12 rounded-[2.5rem] h-full transform transition-transform duration-700 group-hover:-translate-y-2 relative overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-br from-brand-beige/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        <div class="relative z-10">
-                            <div class="w-16 h-16 bg-brand-beige rounded-2xl flex items-center justify-center mb-8 border border-brand-sand group-hover:scale-110 transition-transform duration-500 shadow-inner">
-                                <i data-lucide="laptop" class="w-7 h-7 text-brand-forest group-hover:text-brand-dark transition-colors"></i>
-                            </div>
-                            <h3 class="text-2xl font-serif font-semibold text-brand-dark mb-2">Διαδικτυακή Ψυχοθεραπεία</h3>
-                            <h4 class="text-brand-sage font-medium tracking-wide mb-6">Online Συνεδρίες</h4>
-                            <p class="text-brand-text font-light leading-relaxed mb-8">
-                                Αναγνωρίζοντας τους περιορισμούς του χρόνου ή της απόστασης, όλες οι υπηρεσίες του γραφείου προσφέρονται και διαδικτυακά. Μέσω κρυπτογραφημένης βιντεοκλήσης, ο θεραπευτικός χώρος μεταφέρεται με απόλυτη εχεμύθεια, σταθερότητα και ασφάλεια στην άνεση του δικού σας, ιδιωτικού περιβάλλοντος.
-                            </p>
-                            <div class="flex flex-wrap gap-3 mt-auto">
-                                <span class="px-4 py-1.5 bg-white border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-full shadow-sm">Βιντεοκλήση 50'</span>
-                                <span class="px-4 py-1.5 bg-white border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-full shadow-sm">Εχεμύθεια</span>
-                            </div>
-                        </div>
+                <div class="group bg-white p-8 sm:p-10 rounded-[2.5rem] reveal delay-100 shadow-sm hover:shadow-lux transition-all duration-300 border border-brand-sand/50 hover:-translate-y-1 lg:translate-y-8">
+                    <div class="w-14 h-14 bg-brand-beige rounded-2xl flex items-center justify-center mb-6 border border-brand-sand group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="laptop" class="w-6 h-6 text-brand-forest"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif font-semibold text-brand-dark mb-2">Διαδικτυακή Ψυχοθεραπεία</h3>
+                    <h4 class="text-brand-sage font-medium tracking-wide mb-4">Online Συνεδρίες</h4>
+                    <p class="text-brand-text font-light leading-relaxed mb-8">
+                        Αναγνωρίζοντας τους περιορισμούς του χρόνου ή της απόστασης, όλες οι υπηρεσίες του γραφείου προσφέρονται και διαδικτυακά. Μέσω κρυπτογραφημένης βιντεοκλήσης, ο θεραπευτικός χώρος μεταφέρεται με απόλυτη εχεμύθεια, σταθερότητα και ασφάλεια στην άνεση του δικού σας, ιδιωτικού περιβάλλοντος.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1.5 bg-brand-beige border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-md">Βιντεοκλήση 50'</span>
+                        <span class="px-3 py-1.5 bg-brand-beige border border-brand-sand text-brand-forest text-xs font-bold tracking-wider rounded-md">Εχεμύθεια</span>
                     </div>
                 </div>
 
@@ -382,55 +332,56 @@
     </section>
 
     <!-- Philosophy Section -->
-    <section id="philosophy" class="py-32 px-6 bg-brand-dark text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-20 mix-blend-overlay">
-            <div class="absolute top-0 right-0 w-[60vw] h-[60vw] bg-brand-sage rounded-full blur-[150px] animate-blob"></div>
-            <div class="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-brand-forest rounded-full blur-[150px] animate-blob" style="animation-delay: 3s;"></div>
+    <section id="philosophy" class="py-24 lg:py-32 px-6 bg-brand-dark text-white relative overflow-hidden">
+        <!-- Static background optimization -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-sage/10 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-brand-forest/20 rounded-full blur-[100px]"></div>
         </div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="grid lg:grid-cols-12 gap-16 items-start">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
                 <div class="lg:col-span-5 reveal">
                     <span class="text-brand-sage font-bold tracking-[0.2em] text-xs uppercase mb-4 block">ΜΕΘΟΔΟΛΟΓΙΑ</span>
-                    <h2 class="text-4xl md:text-5xl font-serif mb-8 leading-tight">Η Θεραπευτική μου Πυξίδα:<br><span class="italic font-light text-brand-beige">Ξαναγράφοντας το "Σενάριο" της Ζωής σας</span></h2>
-                    <p class="text-brand-sand/80 text-lg font-light leading-relaxed mb-8">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif mb-6 leading-tight">Η Θεραπευτική μου Πυξίδα:<br><span class="italic font-light text-brand-beige">Ξαναγράφοντας το "Σενάριο" της Ζωής σας</span></h2>
+                    <p class="text-brand-sand/80 text-base sm:text-lg font-light leading-relaxed mb-8">
                         Οι περισσότεροι άνθρωποι ξεκινούν ψυχοθεραπεία νιώθοντας ότι κάπου έχουν "κολλήσει". Ως Συστημικός Ψυχοθεραπευτής, δεν πιστεύω ότι οι άνθρωποι «χαλάνε» και χρειάζονται διόρθωση. Πιστεύω ότι απλώς εγκλωβίζονται σε ιστορίες και μοτίβα που κάποτε τους ήταν χρήσιμα, αλλά πλέον δεν τους εξυπηρετούν.
                     </p>
                 </div>
 
                 <div class="lg:col-span-7 grid gap-6">
                     
-                    <div class="group bg-white/5 border border-white/10 p-8 md:p-10 rounded-[2rem] reveal flex flex-col sm:flex-row gap-6 hover:bg-white/10 hover:border-brand-sage/50 transition-all duration-500 backdrop-blur-md">
+                    <div class="group bg-white/5 border border-white/10 p-6 sm:p-8 rounded-[2rem] reveal flex flex-col sm:flex-row gap-5 hover:bg-white/10 hover:border-brand-sage/40 transition-colors duration-300">
                         <div class="shrink-0">
-                            <span class="w-14 h-14 rounded-2xl border border-brand-sage/50 text-brand-sage flex items-center justify-center font-serif text-2xl group-hover:bg-brand-sage group-hover:text-white transition-colors duration-500 shadow-inner">1</span>
+                            <span class="w-12 h-12 rounded-xl border border-brand-sage/40 text-brand-sage flex items-center justify-center font-serif text-xl group-hover:bg-brand-sage group-hover:text-white transition-colors duration-300">1</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-serif mb-3 text-brand-sand">Η Δύναμη της «Αφήγησης» (Narrative)</h3>
-                            <p class="text-white/70 font-light leading-relaxed">
+                            <h3 class="text-xl font-serif mb-2 text-brand-sand">Η Δύναμη της «Αφήγησης» (Narrative)</h3>
+                            <p class="text-white/70 font-light leading-relaxed text-sm sm:text-base">
                                 Από την παιδική μας ηλικία, δημιουργούμε ένα σενάριο για το ποιοι είμαστε: «Είμαι ο αδύναμος», «Είμαι αυτός που πρέπει να τους φροντίζει όλους», «Δεν αξίζω να αγαπηθώ». Στη θεραπεία μας, θα πάρουμε αυτό το παλιό σενάριο και θα το διαβάσουμε ξανά. Στόχος μας είναι να γίνετε εσείς ο συγγραφέας της ζωής σας.
                             </p>
                         </div>
                     </div>
 
-                    <div class="group bg-white/5 border border-white/10 p-8 md:p-10 rounded-[2rem] reveal delay-100 flex flex-col sm:flex-row gap-6 hover:bg-white/10 hover:border-brand-sage/50 transition-all duration-500 backdrop-blur-md">
+                    <div class="group bg-white/5 border border-white/10 p-6 sm:p-8 rounded-[2rem] reveal delay-100 flex flex-col sm:flex-row gap-5 hover:bg-white/10 hover:border-brand-sage/40 transition-colors duration-300">
                         <div class="shrink-0">
-                            <span class="w-14 h-14 rounded-2xl border border-brand-sage/50 text-brand-sage flex items-center justify-center font-serif text-2xl group-hover:bg-brand-sage group-hover:text-white transition-colors duration-500 shadow-inner">2</span>
+                            <span class="w-12 h-12 rounded-xl border border-brand-sage/40 text-brand-sage flex items-center justify-center font-serif text-xl group-hover:bg-brand-sage group-hover:text-white transition-colors duration-300">2</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-serif mb-3 text-brand-sand">Το Δίκτυο των Σχέσεων (System)</h3>
-                            <p class="text-white/70 font-light leading-relaxed">
+                            <h3 class="text-xl font-serif mb-2 text-brand-sand">Το Δίκτυο των Σχέσεων (System)</h3>
+                            <p class="text-white/70 font-light leading-relaxed text-sm sm:text-base">
                                 Δεν είστε ένα απομονωμένο νησί. Το άγχος, οι φόβοι ή ο θυμός σας συνδέονται άμεσα με το περιβάλλον σας—την οικογένεια, τους φίλους, τους συναδέλφους. Εξερευνούμε πώς αλληλεπιδράτε με τους άλλους και πώς, αλλάζοντας τη δική σας στάση, αλλάζει αναπόφευκτα και ολόκληρο το σύστημα γύρω σας.
                             </p>
                         </div>
                     </div>
 
-                    <div class="group bg-white/5 border border-white/10 p-8 md:p-10 rounded-[2rem] reveal delay-200 flex flex-col sm:flex-row gap-6 hover:bg-white/10 hover:border-brand-sage/50 transition-all duration-500 backdrop-blur-md">
+                    <div class="group bg-white/5 border border-white/10 p-6 sm:p-8 rounded-[2rem] reveal delay-200 flex flex-col sm:flex-row gap-5 hover:bg-white/10 hover:border-brand-sage/40 transition-colors duration-300">
                         <div class="shrink-0">
-                            <span class="w-14 h-14 rounded-2xl border border-brand-sage/50 text-brand-sage flex items-center justify-center font-serif text-2xl group-hover:bg-brand-sage group-hover:text-white transition-colors duration-500 shadow-inner">3</span>
+                            <span class="w-12 h-12 rounded-xl border border-brand-sage/40 text-brand-sage flex items-center justify-center font-serif text-xl group-hover:bg-brand-sage group-hover:text-white transition-colors duration-300">3</span>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-serif mb-3 text-brand-sand">Η Ασφάλεια του Δεσμού (Attachment)</h3>
-                            <p class="text-white/70 font-light leading-relaxed">
+                            <h3 class="text-xl font-serif mb-2 text-brand-sand">Η Ασφάλεια του Δεσμού (Attachment)</h3>
+                            <p class="text-white/70 font-light leading-relaxed text-sm sm:text-base">
                                 Το μεγαλύτερο εργαλείο αλλαγής είναι η ίδια η θεραπευτική μας σχέση. Το επιστημονικό κύρος της BPS και η εκπαίδευσή μου υπαγορεύουν ένα αυστηρό κλινικό πλαίσιο, γεμάτο ζεστασιά. Εδώ θα βρείτε έναν "ασφαλή δεσμό": έναν χώρο όπου επιτρέπεται να εξελιχθείτε, χωρίς τον παραμικρό φόβο επίκρισης.
                             </p>
                         </div>
@@ -442,33 +393,33 @@
     </section>
 
     <!-- Space / Gallery Section -->
-    <section id="space" class="py-32 px-6 bg-white">
+    <section id="space" class="py-24 lg:py-32 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 reveal">
+            <div class="text-center mb-16 reveal">
                 <span class="text-brand-forest font-bold tracking-[0.2em] text-xs uppercase mb-4 block">ΠΕΡΙΒΑΛΛΟΝ</span>
-                <h2 class="text-4xl md:text-5xl font-serif text-brand-dark">Ο Χώρος Μας</h2>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-brand-dark">Ο Χώρος Μας</h2>
                 <p class="text-brand-text mt-4 max-w-2xl mx-auto font-light leading-relaxed">Ένα περιβάλλον σχεδιασμένο με προσοχή στη λεπτομέρεια, τα χρώματα και τον φωτισμό, για να αποπνέει ηρεμία και απόλυτη ιδιωτικότητα.</p>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-6">
-                <button class="flex-1 rounded-[2.5rem] overflow-hidden group relative reveal shadow-lux border-[6px] border-brand-sand/30" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/ts3.jpg')">
-                    <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/ts3.jpg" alt="Χώρος Γραφείου 1" class="w-full h-[400px] md:h-[600px] object-cover transition-transform duration-1000 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-brand-dark/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                        <i data-lucide="maximize-2" class="w-10 h-10 text-white drop-shadow-md"></i>
+            <div class="flex flex-col md:flex-row gap-4 sm:gap-6">
+                <button class="flex-1 rounded-[2rem] overflow-hidden group relative reveal shadow-sm border-[4px] border-brand-sand/30" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/ts3.jpg')" aria-label="Μεγέθυνση εικόνας χώρου">
+                    <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/ts3.jpg" alt="Χώρος Γραφείου 1" class="w-full h-[300px] md:h-[500px] object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                    <div class="absolute inset-0 bg-brand-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i data-lucide="maximize-2" class="w-8 h-8 text-white"></i>
                     </div>
                 </button>
 
-                <div class="flex-1 flex flex-col gap-6">
-                    <button class="flex-1 rounded-[2.5rem] overflow-hidden group relative reveal delay-100 shadow-lux border-[6px] border-brand-sand/30" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis1.jpg')">
-                        <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis1.jpg" alt="Χώρος Γραφείου 2" class="w-full h-[200px] md:h-[288px] object-cover transition-transform duration-1000 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-brand-dark/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                            <i data-lucide="maximize-2" class="w-10 h-10 text-white drop-shadow-md"></i>
+                <div class="flex-1 flex flex-col gap-4 sm:gap-6">
+                    <button class="flex-1 rounded-[2rem] overflow-hidden group relative reveal delay-100 shadow-sm border-[4px] border-brand-sand/30" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis1.jpg')" aria-label="Μεγέθυνση εικόνας χώρου">
+                        <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis1.jpg" alt="Χώρος Γραφείου 2" class="w-full h-[200px] md:h-[240px] object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-brand-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <i data-lucide="maximize-2" class="w-8 h-8 text-white"></i>
                         </div>
                     </button>
-                    <button class="flex-1 rounded-[2.5rem] overflow-hidden group relative reveal delay-200 shadow-lux border-[6px] border-brand-sand/30" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis4.jpg')">
-                        <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis4.jpg" alt="Χώρος Γραφείου 3" class="w-full h-[200px] md:h-[288px] object-cover transition-transform duration-1000 group-hover:scale-105">
-                        <div class="absolute inset-0 bg-brand-dark/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center backdrop-blur-[2px]">
-                            <i data-lucide="maximize-2" class="w-10 h-10 text-white drop-shadow-md"></i>
+                    <button class="flex-1 rounded-[2rem] overflow-hidden group relative reveal delay-200 shadow-sm border-[4px] border-brand-sand/30" onclick="openLightbox('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis4.jpg')" aria-label="Μεγέθυνση εικόνας χώρου">
+                        <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis4.jpg" alt="Χώρος Γραφείου 3" class="w-full h-[200px] md:h-[240px] object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                        <div class="absolute inset-0 bg-brand-dark/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <i data-lucide="maximize-2" class="w-8 h-8 text-white"></i>
                         </div>
                     </button>
                 </div>
@@ -477,141 +428,138 @@
     </section>
 
     <!-- Lightbox -->
-    <div id="lightbox" class="fixed inset-0 z-[100] bg-brand-dark/95 flex items-center justify-center cursor-zoom-out" onclick="closeLightbox()">
-        <button class="absolute top-8 right-8 text-white/70 hover:text-white transition-colors bg-white/10 rounded-full p-2 hover:bg-white/20">
-            <i data-lucide="x" class="w-8 h-8"></i>
+    <div id="lightbox" class="fixed inset-0 z-[100] flex items-center justify-center cursor-zoom-out" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors bg-white/10 rounded-full p-2" aria-label="Κλείσιμο">
+            <i data-lucide="x" class="w-6 h-6"></i>
         </button>
-        <img id="lightbox-img" src="" alt="Enlarged View" class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-[0_0_80px_rgba(0,0,0,0.5)] cursor-default border border-white/10" onclick="event.stopPropagation()">
+        <img id="lightbox-img" src="" alt="Enlarged View" class="max-w-[95vw] max-h-[95vh] object-contain rounded-xl shadow-2xl cursor-default border border-white/10" onclick="event.stopPropagation()">
     </div>
 
-    <!-- Reviews Section (Vertical Marquee) -->
-    <section class="py-32 bg-brand-beige relative overflow-hidden flex flex-col lg:flex-row items-center">
-        <!-- Background subtle glow -->
-        <div class="absolute top-1/2 left-0 -translate-y-1/2 w-[50vw] h-[50vw] bg-white/50 rounded-full blur-[150px] pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
+    <!-- Reviews Section -->
+    <section class="py-24 lg:py-32 bg-brand-beige relative overflow-hidden flex flex-col lg:flex-row items-center">
+        <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
             
             <div class="reveal">
                 <span class="text-brand-forest font-bold tracking-[0.2em] text-xs uppercase mb-4 block">ΑΞΙΟΛΟΓΗΣΕΙΣ</span>
-                <h2 class="text-4xl md:text-6xl font-serif text-brand-dark mb-6">Εμπειρίες <br>Θεραπευόμενων</h2>
-                <p class="text-brand-text mb-10 text-lg font-light leading-relaxed max-w-md">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-brand-dark mb-6">Εμπειρίες <br>Θεραπευόμενων</h2>
+                <p class="text-brand-text mb-8 text-base sm:text-lg font-light leading-relaxed max-w-md">
                     Η εμπιστοσύνη σας είναι η μεγαλύτερη απόδειξη της δουλειάς μας. Όλες οι αξιολογήσεις είναι πιστοποιημένες μέσω της πλατφόρμας Doctoranytime.
                 </p>
-                <a href="https://www.doctoranytime.gr/d/Psychologos/tsallis-ilias#review-section" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 px-8 py-4 bg-white border border-brand-sand rounded-full font-bold tracking-widest text-sm uppercase text-brand-dark hover:shadow-lux hover:-translate-y-1 transition-all duration-300 group">
+                <a href="https://www.doctoranytime.gr/d/Psychologos/tsallis-ilias#review-section" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-6 py-3.5 bg-white border border-brand-sand rounded-full font-bold tracking-widest text-xs uppercase text-brand-dark hover:shadow-lux transition-all duration-300 group">
                     Διαβάστε περισσότερα
-                    <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-6 opacity-80 group-hover:opacity-100 transition-opacity" alt="Doctoranytime">
+                    <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-5 opacity-80 group-hover:opacity-100 transition-opacity" alt="Doctoranytime" loading="lazy">
                 </a>
             </div>
 
-            <div class="relative h-[600px] w-full max-w-md mx-auto marquee-mask overflow-hidden reveal delay-200">
-                <div class="animate-scroll-vertical flex flex-col gap-6 pt-6">
+            <div class="relative h-[500px] w-full max-w-md mx-auto marquee-mask overflow-hidden reveal delay-100">
+                <div class="animate-scroll-vertical flex flex-col gap-5 pt-4" style="will-change: transform;">
                     <!-- Duplicate block for infinite scroll effect -->
                     <!-- Block 1 -->
-                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-[2rem] shadow-sm border border-brand-sand/50 shrink-0">
+                    <div class="bg-white p-6 sm:p-8 rounded-[1.5rem] shadow-sm border border-brand-sand/50 shrink-0">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-1 text-[#E5C158]">
                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
                             </div>
-                            <span class="font-serif font-bold text-xl text-brand-dark">10.0</span>
+                            <span class="font-serif font-bold text-lg text-brand-dark">10.0</span>
                         </div>
-                        <p class="text-brand-text font-light italic mb-6 leading-relaxed">"Καταρτισμένος και φιλικός με διάθεση να ακούσει τον πελάτη."</p>
+                        <p class="text-brand-text font-light italic mb-5 leading-relaxed text-sm sm:text-base">"Καταρτισμένος και φιλικός με διάθεση να ακούσει τον πελάτη."</p>
                         <div class="flex justify-between items-center border-t border-brand-sand/50 pt-4 mt-auto">
                             <div>
-                                <p class="text-sm font-semibold text-brand-dark tracking-wide uppercase">Αντώνης</p>
-                                <p class="text-xs text-brand-sage font-medium tracking-widest mt-1">10 ΙΑΝ 2023</p>
+                                <p class="text-xs font-semibold text-brand-dark tracking-wide uppercase">Αντώνης</p>
+                                <p class="text-[10px] text-brand-sage font-medium tracking-widest mt-1">10 ΙΑΝ 2023</p>
                             </div>
-                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-4 opacity-40 grayscale" alt="DA">
+                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-3.5 opacity-40 grayscale" alt="DA" loading="lazy">
                         </div>
                     </div>
 
                     <!-- Block 2 -->
-                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-[2rem] shadow-sm border border-brand-sand/50 shrink-0">
+                    <div class="bg-white p-6 sm:p-8 rounded-[1.5rem] shadow-sm border border-brand-sand/50 shrink-0">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-1 text-[#E5C158]">
                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
                             </div>
-                            <span class="font-serif font-bold text-xl text-brand-dark">10.0</span>
+                            <span class="font-serif font-bold text-lg text-brand-dark">10.0</span>
                         </div>
-                        <p class="text-brand-text font-light italic mb-6 leading-relaxed">"Σου εκπέμπει εμπιστοσύνη. Νιώθεις άνετα να συζητήσεις για ότι σε προβληματίζει. Προσωπικά βλέπω βελτίωση μετα από κάθε συνεδρία."</p>
+                        <p class="text-brand-text font-light italic mb-5 leading-relaxed text-sm sm:text-base">"Σου εκπέμπει εμπιστοσύνη. Νιώθεις άνετα να συζητήσεις για ότι σε προβληματίζει. Προσωπικά βλέπω βελτίωση μετα από κάθε συνεδρία."</p>
                         <div class="flex justify-between items-center border-t border-brand-sand/50 pt-4 mt-auto">
                             <div>
-                                <p class="text-sm font-semibold text-brand-dark tracking-wide uppercase">Anna</p>
-                                <p class="text-xs text-brand-sage font-medium tracking-widest mt-1">15 ΙΟΥΝ 2022</p>
+                                <p class="text-xs font-semibold text-brand-dark tracking-wide uppercase">Anna</p>
+                                <p class="text-[10px] text-brand-sage font-medium tracking-widest mt-1">15 ΙΟΥΝ 2022</p>
                             </div>
-                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-4 opacity-40 grayscale" alt="DA">
+                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-3.5 opacity-40 grayscale" alt="DA" loading="lazy">
                         </div>
                     </div>
 
                     <!-- Block 3 -->
-                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-[2rem] shadow-sm border border-brand-sand/50 shrink-0">
+                    <div class="bg-white p-6 sm:p-8 rounded-[1.5rem] shadow-sm border border-brand-sand/50 shrink-0">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-1 text-[#E5C158]">
                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
                             </div>
-                            <span class="font-serif font-bold text-xl text-brand-dark">10.0</span>
+                            <span class="font-serif font-bold text-lg text-brand-dark">10.0</span>
                         </div>
-                        <p class="text-brand-text font-light italic mb-6 leading-relaxed">"Μου ενέπνευσε εμπιστοσύνη και ασφάλεια από τα πρώτα ραντεβού. Σύντομα άρχισα να αντιμετωπίζω διαφορετικά διάφορες καταστάσεις."</p>
+                        <p class="text-brand-text font-light italic mb-5 leading-relaxed text-sm sm:text-base">"Μου ενέπνευσε εμπιστοσύνη και ασφάλεια από τα πρώτα ραντεβού. Σύντομα άρχισα να αντιμετωπίζω διαφορετικά διάφορες καταστάσεις."</p>
                         <div class="flex justify-between items-center border-t border-brand-sand/50 pt-4 mt-auto">
                             <div>
-                                <p class="text-sm font-semibold text-brand-dark tracking-wide uppercase">Γιώτα</p>
-                                <p class="text-xs text-brand-sage font-medium tracking-widest mt-1">07 ΙΟΥΝ 2022</p>
+                                <p class="text-xs font-semibold text-brand-dark tracking-wide uppercase">Γιώτα</p>
+                                <p class="text-[10px] text-brand-sage font-medium tracking-widest mt-1">07 ΙΟΥΝ 2022</p>
                             </div>
-                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-4 opacity-40 grayscale" alt="DA">
+                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-3.5 opacity-40 grayscale" alt="DA" loading="lazy">
                         </div>
                     </div>
 
                     <!-- Block 4 -->
-                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-[2rem] shadow-sm border border-brand-sand/50 shrink-0">
+                    <div class="bg-white p-6 sm:p-8 rounded-[1.5rem] shadow-sm border border-brand-sand/50 shrink-0">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-1 text-[#E5C158]">
                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
                             </div>
-                            <span class="font-serif font-bold text-xl text-brand-dark">10.0</span>
+                            <span class="font-serif font-bold text-lg text-brand-dark">10.0</span>
                         </div>
-                        <p class="text-brand-text font-light italic mb-6 leading-relaxed">"Πολύ προσιτός άνθρωπος που σε κάνει να νιώσεις άνετα. Τυπικός με τα ραντεβού του, με ωραίο φιλόξενο χώρο."</p>
+                        <p class="text-brand-text font-light italic mb-5 leading-relaxed text-sm sm:text-base">"Πολύ προσιτός άνθρωπος που σε κάνει να νιώσεις άνετα. Τυπικός με τα ραντεβού του, με ωραίο φιλόξενο χώρο."</p>
                         <div class="flex justify-between items-center border-t border-brand-sand/50 pt-4 mt-auto">
                             <div>
-                                <p class="text-sm font-semibold text-brand-dark tracking-wide uppercase">Nikos</p>
-                                <p class="text-xs text-brand-sage font-medium tracking-widest mt-1">27 ΑΠΡ 2022</p>
+                                <p class="text-xs font-semibold text-brand-dark tracking-wide uppercase">Nikos</p>
+                                <p class="text-[10px] text-brand-sage font-medium tracking-widest mt-1">27 ΑΠΡ 2022</p>
                             </div>
-                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-4 opacity-40 grayscale" alt="DA">
+                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-3.5 opacity-40 grayscale" alt="DA" loading="lazy">
                         </div>
                     </div>
 
                     <!-- REPEAT FOR MARQUEE -->
                     <!-- Block 1 -->
-                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-[2rem] shadow-sm border border-brand-sand/50 shrink-0">
+                    <div class="bg-white p-6 sm:p-8 rounded-[1.5rem] shadow-sm border border-brand-sand/50 shrink-0">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-1 text-[#E5C158]">
                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
                             </div>
-                            <span class="font-serif font-bold text-xl text-brand-dark">10.0</span>
+                            <span class="font-serif font-bold text-lg text-brand-dark">10.0</span>
                         </div>
-                        <p class="text-brand-text font-light italic mb-6 leading-relaxed">"Καταρτισμένος και φιλικός με διάθεση να ακούσει τον πελάτη."</p>
+                        <p class="text-brand-text font-light italic mb-5 leading-relaxed text-sm sm:text-base">"Καταρτισμένος και φιλικός με διάθεση να ακούσει τον πελάτη."</p>
                         <div class="flex justify-between items-center border-t border-brand-sand/50 pt-4 mt-auto">
                             <div>
-                                <p class="text-sm font-semibold text-brand-dark tracking-wide uppercase">Αντώνης</p>
-                                <p class="text-xs text-brand-sage font-medium tracking-widest mt-1">10 ΙΑΝ 2023</p>
+                                <p class="text-xs font-semibold text-brand-dark tracking-wide uppercase">Αντώνης</p>
+                                <p class="text-[10px] text-brand-sage font-medium tracking-widest mt-1">10 ΙΑΝ 2023</p>
                             </div>
-                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-4 opacity-40 grayscale" alt="DA">
+                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-3.5 opacity-40 grayscale" alt="DA" loading="lazy">
                         </div>
                     </div>
 
                     <!-- Block 2 -->
-                    <div class="bg-white/80 backdrop-blur-md p-8 rounded-[2rem] shadow-sm border border-brand-sand/50 shrink-0">
+                    <div class="bg-white p-6 sm:p-8 rounded-[1.5rem] shadow-sm border border-brand-sand/50 shrink-0">
                         <div class="flex justify-between items-start mb-4">
                             <div class="flex gap-1 text-[#E5C158]">
                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i>
                             </div>
-                            <span class="font-serif font-bold text-xl text-brand-dark">10.0</span>
+                            <span class="font-serif font-bold text-lg text-brand-dark">10.0</span>
                         </div>
-                        <p class="text-brand-text font-light italic mb-6 leading-relaxed">"Σου εκπέμπει εμπιστοσύνη. Νιώθεις άνετα να συζητήσεις για ότι σε προβληματίζει. Προσωπικά βλέπω βελτίωση μετα από κάθε συνεδρία."</p>
+                        <p class="text-brand-text font-light italic mb-5 leading-relaxed text-sm sm:text-base">"Σου εκπέμπει εμπιστοσύνη. Νιώθεις άνετα να συζητήσεις για ότι σε προβληματίζει. Προσωπικά βλέπω βελτίωση μετα από κάθε συνεδρία."</p>
                         <div class="flex justify-between items-center border-t border-brand-sand/50 pt-4 mt-auto">
                             <div>
-                                <p class="text-sm font-semibold text-brand-dark tracking-wide uppercase">Anna</p>
-                                <p class="text-xs text-brand-sage font-medium tracking-widest mt-1">15 ΙΟΥΝ 2022</p>
+                                <p class="text-xs font-semibold text-brand-dark tracking-wide uppercase">Anna</p>
+                                <p class="text-[10px] text-brand-sage font-medium tracking-widest mt-1">15 ΙΟΥΝ 2022</p>
                             </div>
-                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-4 opacity-40 grayscale" alt="DA">
+                            <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" class="h-3.5 opacity-40 grayscale" alt="DA" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -621,63 +569,62 @@
     </section>
 
     <!-- Footer / Contact -->
-    <footer id="contact" class="bg-brand-dark text-white pt-32 pb-12 relative overflow-hidden">
-        <!-- Glowing ambient shadows for visual interest -->
-        <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-brand-sage/20 rounded-full blur-[150px] pointer-events-none mix-blend-screen"></div>
-        <div class="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-brand-forest/30 rounded-full blur-[150px] pointer-events-none mix-blend-screen"></div>
+    <footer id="contact" class="bg-brand-dark text-white pt-24 lg:pt-32 pb-10 relative overflow-hidden">
+        <!-- Static background shadow for interest -->
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-sage/10 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+            <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
                 
                 <!-- CTA -->
                 <div class="lg:col-span-5 reveal">
-                    <h2 class="text-4xl font-serif mb-6 text-white leading-tight">Κάντε το <br><span class="italic text-brand-beige font-light">Πρώτο Βήμα</span></h2>
-                    <p class="text-brand-sand/80 font-light leading-relaxed mb-10 max-w-sm">
+                    <h2 class="text-3xl sm:text-4xl font-serif mb-6 text-white leading-tight">Κάντε το <br><span class="italic text-brand-beige font-light">Πρώτο Βήμα</span></h2>
+                    <p class="text-brand-sand/80 font-light leading-relaxed mb-8 max-w-sm">
                         Η επούλωση ξεκινά με την απόφαση να φροντίσετε τον εαυτό σας. Επικοινωνήστε για να ορίσουμε την πρώτη σας συνεδρία.
                     </p>
-                    <a href="https://www.doctoranytime.gr/d/Psychologos/tsallis-ilias" target="_blank" class="inline-flex items-center gap-3 bg-white text-brand-dark px-8 py-4 rounded-full font-bold tracking-widest uppercase text-sm hover:bg-brand-sage hover:text-white transition-all duration-500 shadow-glow hover:-translate-y-1">
-                        <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" alt="Doctoranytime" class="h-5 mix-blend-multiply">
+                    <a href="https://www.doctoranytime.gr/d/Psychologos/tsallis-ilias" target="_blank" class="inline-flex items-center gap-3 bg-white text-brand-dark px-6 py-3.5 rounded-full font-bold tracking-widest uppercase text-xs hover:bg-brand-sage hover:text-white transition-colors duration-300">
+                        <img src="https://raw.githubusercontent.com/agelmet/KARAZOLI/refs/heads/main/lgoodoc.jpg" alt="Doctoranytime" class="h-4 mix-blend-multiply" loading="lazy">
                         Κλείστε Ραντεβού
                     </a>
                 </div>
 
                 <!-- Contact Details -->
                 <div class="lg:col-span-4 reveal delay-100">
-                    <h4 class="text-xs font-bold text-brand-sage tracking-[0.2em] uppercase mb-8">ΣΤΟΙΧΕΙΑ ΕΠΙΚΟΙΝΩΝΙΑΣ</h4>
-                    <ul class="space-y-6 text-brand-sand/90 font-light">
-                        <li class="flex items-center gap-5 group">
-                            <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-sage/20 group-hover:border-brand-sage/50 transition-all duration-300">
-                                <i data-lucide="phone" class="w-5 h-5 text-brand-sand"></i>
+                    <h4 class="text-xs font-bold text-brand-sage tracking-[0.2em] uppercase mb-6">ΣΤΟΙΧΕΙΑ ΕΠΙΚΟΙΝΩΝΙΑΣ</h4>
+                    <ul class="space-y-5 text-brand-sand/90 font-light">
+                        <li class="flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-sage/20 transition-colors duration-300">
+                                <i data-lucide="phone" class="w-4 h-4 text-brand-sand"></i>
                             </div>
-                            <a href="tel:+306977605581" class="hover:text-white transition-colors text-lg tracking-wide">+30 697 760 5581</a>
+                            <a href="tel:+306977605581" class="hover:text-white transition-colors text-base tracking-wide">+30 697 760 5581</a>
                         </li>
-                        <li class="flex items-center gap-5 group">
-                            <div class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-sage/20 group-hover:border-brand-sage/50 transition-all duration-300">
-                                <i data-lucide="mail" class="w-5 h-5 text-brand-sand"></i>
+                        <li class="flex items-center gap-4 group">
+                            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-brand-sage/20 transition-colors duration-300">
+                                <i data-lucide="mail" class="w-4 h-4 text-brand-sand"></i>
                             </div>
-                            <a href="mailto:iliastsallis@gmail.com" class="hover:text-white transition-colors text-lg tracking-wide">iliastsallis@gmail.com</a>
+                            <a href="mailto:iliastsallis@gmail.com" class="hover:text-white transition-colors text-base tracking-wide">iliastsallis@gmail.com</a>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Hours -->
                 <div class="lg:col-span-3 reveal delay-200">
-                    <h4 class="text-xs font-bold text-brand-sage tracking-[0.2em] uppercase mb-8">ΩΡΑΡΙΟ ΛΕΙΤΟΥΡΓΙΑΣ</h4>
-                    <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
-                        <div class="flex items-center gap-4 mb-3">
-                            <i data-lucide="clock" class="w-6 h-6 text-brand-sage"></i>
-                            <span class="font-medium text-white tracking-wide">Δευτέρα - Σάββατο</span>
+                    <h4 class="text-xs font-bold text-brand-sage tracking-[0.2em] uppercase mb-6">ΩΡΑΡΙΟ ΛΕΙΤΟΥΡΓΙΑΣ</h4>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                        <div class="flex items-center gap-3 mb-2">
+                            <i data-lucide="clock" class="w-5 h-5 text-brand-sage"></i>
+                            <span class="font-medium text-white tracking-wide text-sm">Δευτέρα - Σάββατο</span>
                         </div>
-                        <p class="text-brand-sand/60 text-sm ml-10 tracking-widest uppercase">Κατόπιν Ραντεβού</p>
+                        <p class="text-brand-sand/60 text-xs ml-8 tracking-widest uppercase">Κατόπιν Ραντεβού</p>
                     </div>
                 </div>
 
             </div>
 
             <!-- Copyright -->
-            <div class="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-4 reveal">
-                <p class="text-brand-sand/50 text-sm font-light tracking-wide">© 2026 Ηλίας Τσάλλης. Όλα τα δικαιώματα διατηρούνται.</p>
-                <p class="text-brand-sand/50 text-sm font-light tracking-wide">
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 reveal">
+                <p class="text-brand-sand/50 text-xs font-light tracking-wide">© 2026 Ηλίας Τσάλλης. Όλα τα δικαιώματα διατηρούνται.</p>
+                <p class="text-brand-sand/50 text-xs font-light tracking-wide">
                     Designed by <a href="https://advonmedia.com" target="_blank" rel="noopener" class="text-white font-medium hover:text-brand-sage transition-colors">Advon Media</a>
                 </p>
             </div>
@@ -686,10 +633,10 @@
 
     <!-- Scripts -->
     <script>
-        // 1. Initialize Lucide Icons
+        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // 2. Mobile Menu Logic
+        // Mobile Menu Logic
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -706,33 +653,38 @@
             });
         });
 
-        // 3. Navbar Sticky Effect
+        // Navbar Sticky Effect
         const navbar = document.getElementById('navbar');
+        const glassNav = navbar.querySelector('.glass');
+        
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
                 navbar.classList.add('py-2');
                 navbar.classList.remove('py-4');
-                navbar.querySelector('.glass').classList.add('shadow-md', 'bg-brand-beige/90');
-                navbar.querySelector('.glass').classList.remove('border-white/60');
+                glassNav.classList.add('shadow-md', 'bg-brand-beige/95');
+                glassNav.classList.remove('border-white/60');
             } else {
                 navbar.classList.add('py-4');
                 navbar.classList.remove('py-2');
-                navbar.querySelector('.glass').classList.remove('shadow-md', 'bg-brand-beige/90');
-                navbar.querySelector('.glass').classList.add('border-white/60');
+                glassNav.classList.remove('shadow-md', 'bg-brand-beige/95');
+                glassNav.classList.add('border-white/60');
             }
         });
 
-        // 4. Scroll Reveal Animations
+        // Scroll Reveal Animations (Optimized with Intersection Observer)
         const observerOptions = {
             root: null,
-            rootMargin: '0px',
+            rootMargin: '0px 0px -50px 0px',
             threshold: 0.1
         };
 
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+                    // Use requestAnimationFrame for smoother paint
+                    requestAnimationFrame(() => {
+                        entry.target.classList.add('active');
+                    });
                     observer.unobserve(entry.target); 
                 }
             });
@@ -742,7 +694,7 @@
             observer.observe(el);
         });
 
-        // 5. Lightbox Functionality for Space Images
+        // Lightbox Functionality for Space Images
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
 
@@ -757,7 +709,7 @@
             setTimeout(() => {
                 lightboxImg.src = '';
                 document.body.style.overflow = '';
-            }, 500);
+            }, 400); // match transition duration
         }
 
         document.addEventListener('keydown', (e) => {
