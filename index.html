@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="el" class="scroll-smooth">
 <head>
@@ -11,10 +10,12 @@
     <meta name="author" content="Advon Media">
     <meta name="robots" content="index, follow">
     
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght=0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -89,10 +90,12 @@
 </head>
 <body class="antialiased selection:bg-brand-sage selection:text-white">
 
-    <nav class="fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
+    <!-- Navigation -->
+    <nav class="absolute lg:fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
         <div class="max-w-7xl mx-auto px-6">
             <div class="glass rounded-full flex justify-between items-center px-6 md:px-8 py-3 shadow-sm border border-white/60">
                 
+                <!-- Logo Title (No Circle Logo - Clear Full Name & Title) -->
                 <a href="#" class="flex flex-col justify-center group">
                     <span class="font-serif text-lg md:text-xl tracking-[0.15em] text-brand-dark uppercase leading-none mb-1 group-hover:text-brand-forest transition-colors">Ηλιας Τσαλλης</span>
                     <span class="text-[8px] md:text-[9px] tracking-[0.25em] text-brand-sage uppercase font-semibold leading-none">Συστημικός Ψυχοθεραπευτής</span>
@@ -112,6 +115,7 @@
             </div>
         </div>
         
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="absolute top-full left-0 w-full bg-brand-beige/98 backdrop-blur-md hidden flex-col items-center py-10 space-y-8 border-t border-brand-sand shadow-lux">
             <a href="#about" class="text-lg font-serif text-brand-dark mobile-link">Η Προσέγγιση</a>
             <a href="#services" class="text-lg font-serif text-brand-dark mobile-link">Υπηρεσίες</a>
@@ -121,21 +125,28 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section class="relative min-h-[100svh] flex items-center pt-32 pb-20 overflow-hidden bg-brand-beige">
+        <!-- Background Layer - Clearer Visibility & High Contrast -->
         <div class="absolute inset-0 z-0 overflow-hidden">
             <div class="absolute inset-0 bg-[url('https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/tsallis1.jpg')] bg-cover bg-center opacity-75"></div>
+            <!-- Optimized tint gradient for readability while showing the image beautifully -->
             <div class="absolute inset-0 bg-gradient-to-r from-brand-beige/90 via-brand-beige/70 to-brand-beige/40 lg:from-brand-beige/80 lg:via-brand-beige/60 lg:to-brand-beige/25"></div>
         </div>
 
         <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
             
+            <!-- Left: Portrait -->
             <div class="order-2 lg:order-1 relative h-[450px] sm:h-[550px] lg:h-[700px] w-full flex justify-center lg:justify-start">
+                <!-- Static accent background -->
                 <div class="absolute w-[80%] h-[90%] border border-brand-sage/50 rounded-[3rem] -rotate-3 top-4 left-4 z-0 bg-brand-sand/20"></div>
                 
+                <!-- Main Image Wrapper -->
                 <div class="relative z-10 w-[85%] h-[95%] mt-auto rounded-t-full rounded-b-[2.5rem] overflow-hidden shadow-deep img-wrapper bg-brand-sand">
                     <img src="https://raw.githubusercontent.com/agelmet/TSALLIS/refs/heads/main/ts5.jpg" alt="Ηλίας Τσάλλης - Ψυχολόγος" class="w-full h-full object-cover object-top">
                 </div>
                 
+                <!-- Floating Badge -->
                 <div class="absolute bottom-10 right-2 lg:-right-8 z-20 glass p-4 rounded-2xl shadow-glow flex items-center gap-4 border-white/60">
                     <div class="w-12 h-12 rounded-xl bg-brand-forest flex items-center justify-center text-white">
                         <i data-lucide="shield-check" class="w-6 h-6"></i>
@@ -147,6 +158,7 @@
                 </div>
             </div>
 
+            <!-- Right: Content -->
             <div class="order-1 lg:order-2">
                 <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full border border-brand-sage/40 text-brand-dark text-xs font-bold tracking-[0.2em] uppercase mb-8 bg-white/80 backdrop-blur-sm shadow-sm">
                     <span class="w-1.5 h-1.5 rounded-full bg-brand-sage"></span>
@@ -176,6 +188,7 @@
         </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="py-24 lg:py-32 px-6 bg-white relative">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16 items-center">
             
@@ -187,7 +200,7 @@
                         Ο <strong>Ηλίας Τσάλλης</strong> είναι αδειούχος Ψυχολόγος (Αρ. Αδείας: 3577/2020) και Συστημικός Ψυχοθεραπευτής, διατηρώντας το ιδιωτικό του γραφείο στο Περιστέρι. Η ακαδημαϊκή του ταυτότητα εδράζεται στα υψηλά βρετανικά πρότυπα εκπαίδευσης: είναι κάτοχος πτυχίου Ψυχολογίας (BSc in Psychology) από το <strong>University of East London</strong> και περήφανο μέλος της έγκριτης <strong>Βρετανικής Εταιρείας Ψυχολόγων (BPS)</strong>.
                     </p>
                     <p>
-                        Το κλινικό του βάθος, ωστόσο, διαμορφώθηκε μέσα από την απαιτητική του ειδίκευση στο Κλινικό Πρόγραμμα Συστημικής Ψυχοθεραπείας <strong>S.A.N.E. (System Attachment Narrative Encephalon)</strong>, στο Ινστιτούτο «Λόγω Ψυχής». Η συγκεκριμένη προσέ이지 προσέγγιση του επιτρέπει να συνδυάζει την επιστήμη του εγκεφάλου με τη θεωρία του συναισθηματικού δεσμού, κατανοώντας τον άνθρωπο ως μια ολότητα.
+                        Το κλινικό του βάθος, ωστόσο, διαμορφώθηκε μέσα από την απαιτητική του ειδίκευση στο Κλινικό Πρόγραμμα Συστημικής Ψυχοθεραπείας <strong>S.A.N.E. (System Attachment Narrative Encephalon)</strong>, στο Ινστιτούτο «Λόγω Ψυχής». Η συγκεκριμένη προσέγγιση του επιτρέπει να συνδυάζει την επιστήμη του εγκεφάλου με τη θεωρία του συναισθηματικού δεσμού, κατανοώντας τον άνθρωπο ως μια ολότητα.
                     </p>
                     <p>
                         Είναι τακτικό μέλος της <strong>Ελληνικής Εταιρείας Συστημικής Θεραπείας (ΕΛΕΣΥΘ)</strong> και επενδύει διαρκώς στη συνεχιζόμενη κατάρτισή του. Στο ζεστό και ασφαλές περιβάλλον του γραφείου του (ή μέσω διαδικτύου), υποδέχεται ενήλικες, ζευγάρια και οικογένειες. Με σύμμαχο την εμπιστοσύνη των θεραπευόμενων που τον έχουν ήδη επιλέξει (διαθέτοντας εξαιρετικές συστάσεις), σας συνοδεύει στη διαχείριση του άγχους, στην επίλυση διαπροσωπικών συγκρούσεων και στην αναδόμηση της καθημερινότητάς σας.
@@ -205,6 +218,7 @@
         </div>
     </section>
 
+    <!-- Services Section -->
     <section id="services" class="py-24 lg:py-32 px-6 relative bg-brand-beige service-bg-lines overflow-hidden">
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="text-center mb-16">
@@ -215,6 +229,7 @@
 
             <div class="grid md:grid-cols-2 gap-8">
                 
+                <!-- Service 1 -->
                 <div class="group bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-sm hover:shadow-lux transition-all duration-300 border border-brand-sand/50">
                     <div class="w-14 h-14 bg-brand-beige rounded-2xl flex items-center justify-center mb-6 border border-brand-sand">
                         <i data-lucide="user" class="w-6 h-6 text-brand-forest"></i>
@@ -230,6 +245,7 @@
                     </div>
                 </div>
 
+                <!-- Service 2 -->
                 <div class="group bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-sm hover:shadow-lux transition-all duration-300 border border-brand-sand/50">
                     <div class="w-14 h-14 bg-brand-beige rounded-2xl flex items-center justify-center mb-6 border border-brand-sand">
                         <i data-lucide="heart-handshake" class="w-6 h-6 text-brand-forest"></i>
@@ -245,6 +261,7 @@
                     </div>
                 </div>
 
+                <!-- Service 3 -->
                 <div class="group bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-sm hover:shadow-lux transition-all duration-300 border border-brand-sand/50">
                     <div class="w-14 h-14 bg-brand-beige rounded-2xl flex items-center justify-center mb-6 border border-brand-sand">
                         <i data-lucide="home" class="w-6 h-6 text-brand-forest"></i>
@@ -260,6 +277,7 @@
                     </div>
                 </div>
 
+                <!-- Service 4 -->
                 <div class="group bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-sm hover:shadow-lux transition-all duration-300 border border-brand-sand/50">
                     <div class="w-14 h-14 bg-brand-beige rounded-2xl flex items-center justify-center mb-6 border border-brand-sand">
                         <i data-lucide="laptop" class="w-6 h-6 text-brand-forest"></i>
@@ -279,6 +297,7 @@
         </div>
     </section>
 
+    <!-- Philosophy Section -->
     <section id="philosophy" class="py-24 lg:py-32 px-6 bg-brand-dark text-white relative overflow-hidden">
         <div class="absolute inset-0 z-0">
             <div class="absolute top-0 right-0 w-[50vw] h-[50vw] bg-brand-sage/10 rounded-full blur-[100px]"></div>
@@ -337,6 +356,7 @@
         </div>
     </section>
 
+    <!-- Space / Gallery Section -->
     <section id="space" class="py-24 lg:py-32 px-6 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
@@ -371,6 +391,7 @@
         </div>
     </section>
 
+    <!-- Lightbox -->
     <div id="lightbox" class="fixed inset-0 z-[100] flex items-center justify-center cursor-zoom-out" onclick="closeLightbox()">
         <button class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors bg-white/10 rounded-full p-2" aria-label="Κλείσιμο">
             <i data-lucide="x" class="w-6 h-6"></i>
@@ -378,6 +399,7 @@
         <img id="lightbox-img" src="" alt="Enlarged View" class="max-w-[95vw] max-h-[95vh] object-contain rounded-xl shadow-2xl cursor-default border border-white/10" onclick="event.stopPropagation()">
     </div>
 
+    <!-- Reviews Section -->
     <section class="py-24 lg:py-32 bg-brand-beige relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
             
@@ -393,6 +415,7 @@
                 </a>
             </div>
 
+            <!-- Static, fast loading review cards grid for absolute speed on mobile -->
             <div class="flex flex-col gap-5 w-full max-w-md mx-auto">
                 <div class="bg-white p-6 sm:p-8 rounded-[1.5rem] shadow-sm border border-brand-sand/50">
                     <div class="flex justify-between items-start mb-4">
@@ -432,10 +455,12 @@
         </div>
     </section>
 
+    <!-- Footer / Contact -->
     <footer id="contact" class="bg-brand-dark text-white pt-24 lg:pt-32 pb-10 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16 mb-20">
                 
+                <!-- CTA -->
                 <div class="lg:col-span-5">
                     <h2 class="text-3xl sm:text-4xl font-serif mb-6 text-white leading-tight">Κάντε το <br><span class="italic text-brand-beige font-light">Πρώτο Βήμα</span></h2>
                     <p class="text-brand-sand/80 font-light leading-relaxed mb-8 max-w-sm">
@@ -447,24 +472,20 @@
                     </a>
                 </div>
 
+                <!-- Contact Details (Icons Removed) -->
                 <div class="lg:col-span-4">
                     <h4 class="text-xs font-bold text-brand-sage tracking-[0.2em] uppercase mb-6">ΣΤΟΙΧΕΙΑ ΕΠΙΚΟΙΝΩΝΙΑΣ</h4>
                     <ul class="space-y-5 text-brand-sand/90 font-light">
-                        <li class="flex items-center gap-4 group">
-                            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                                <i data-lucide="phone" class="w-4 h-4 text-brand-sand"></i>
-                            </div>
+                        <li class="flex items-center group">
                             <a href="tel:+306977605581" class="hover:text-white transition-colors text-base tracking-wide">+30 697 760 5581</a>
                         </li>
-                        <li class="flex items-center gap-4 group">
-                            <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                                <i data-lucide="mail" class="w-4 h-4 text-brand-sand"></i>
-                            </div>
+                        <li class="flex items-center group">
                             <a href="mailto:iliastsallis@gmail.com" class="hover:text-white transition-colors text-base tracking-wide">iliastsallis@gmail.com</a>
                         </li>
                     </ul>
                 </div>
 
+                <!-- Hours -->
                 <div class="lg:col-span-3">
                     <h4 class="text-xs font-bold text-brand-sage tracking-[0.2em] uppercase mb-6">ΩΡΑΡΙΟ ΛΕΙΤΟΥΡΓΙΑΣ</h4>
                     <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
@@ -478,6 +499,7 @@
 
             </div>
 
+            <!-- Copyright -->
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
                 <p class="text-brand-sand/50 text-xs font-light tracking-wide">© 2026 Ηλίας Τσάλλης. Όλα τα δικαιώματα διατηρούνται.</p>
                 <p class="text-brand-sand/50 text-xs font-light tracking-wide">
@@ -487,6 +509,7 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
@@ -508,19 +531,22 @@
             });
         });
 
-        // Navbar Scroll Effect
+        // Navbar Scroll Effect (For Desktop Only Since Mobile Is Absolute)
         const navbar = document.getElementById('navbar');
         const glassNav = navbar.querySelector('.glass');
         
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 30) {
-                navbar.classList.add('py-2');
-                navbar.classList.remove('py-4');
-                glassNav.classList.add('shadow-md', 'bg-brand-beige/95');
-            } else {
-                navbar.classList.add('py-4');
-                navbar.classList.remove('py-2');
-                glassNav.classList.remove('shadow-md', 'bg-brand-beige/95');
+            // Apply only if the nav is fixed (e.g., desktop lg breakpoint)
+            if (window.innerWidth >= 1024) {
+                if (window.scrollY > 30) {
+                    navbar.classList.add('py-2');
+                    navbar.classList.remove('py-4');
+                    glassNav.classList.add('shadow-md', 'bg-brand-beige/95');
+                } else {
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2');
+                    glassNav.classList.remove('shadow-md', 'bg-brand-beige/95');
+                }
             }
         });
 
@@ -550,5 +576,3 @@
     </script>
 </body>
 </html>
-
-```
