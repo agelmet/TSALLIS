@@ -10,8 +10,16 @@
     · menu exactly as he listed it, top right
     · every section text replaced with his copy; new photos, previous ones dropped
     · structured data carries «Ηλίας Τσάλης» (one λ) as an alternate spelling
-    · display face swapped to Cormorant Garamond — Playfair Display has no Greek glyphs,
-      so the old Greek headings were silently falling back to a system serif
+
+  Round 2 — 10 Sept 2026 (his feedback on the rebuild):
+    · the menu is fixed on every screen size, «Αρχική» first, labels exactly as in his PDF,
+      and it underlines the section the visitor is in
+    · the name is no longer shown twice on the first screen: the bar at the top shows only the menu;
+      the small name («Ψυχολόγος · Συστημικός Ψυχοθεραπευτής») fades into the bar once the big name
+      in the hero has scrolled away
+    · hero follows the PDF order: name → Ψυχολόγος / Συστημικός Ψυχοθεραπευτής → office →
+      Ψυχοθεραπεία & Συμβουλευτική → intro text → photo with «Μέλος BPS & ΕΛΕΣΥΘ» sitting on its bottom edge → 1-2-1 buttons
+    · display face EB Garamond — Cormorant Garamond has no Greek glyphs either
 
   DOMAIN TODO (Angelo): iliastsallis.gr primary, iliastsalis.gr → 301 redirect to it,
   contact address on this page is iliastsallis@gmail.com (no custom mailbox needed).
@@ -36,7 +44,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -55,7 +63,7 @@
                     },
                     fontFamily: {
                         sans:  ['Inter', 'system-ui', 'sans-serif'],
-                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        serif: ['"EB Garamond"', 'Georgia', 'serif'],
                     },
                     boxShadow: {
                         'lux':   '0 20px 40px -10px rgba(94, 109, 91, 0.10)',
@@ -117,71 +125,114 @@
 <body class="font-sans antialiased">
 
 <!-- ================= NAV ================= -->
-<nav class="absolute lg:fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
-    <div class="max-w-7xl mx-auto px-6">
-        <div class="glass rounded-full flex justify-between items-center px-6 md:px-8 py-3 shadow-sm">
-            <a href="#top" class="flex flex-col justify-center group">
-                <span class="font-serif text-lg md:text-xl tracking-[0.12em] text-brand-dark uppercase leading-none mb-1 group-hover:text-brand-forest transition-colors">Ηλίας Τσάλλης</span>
-                <span class="text-[8px] md:text-[9px] tracking-[0.25em] text-brand-sage uppercase font-semibold leading-none">Συστημικός Ψυχοθεραπευτής</span>
+<!-- fixed on every screen size; the small name joins the bar only after the big hero name has scrolled away -->
+<nav id="navbar" class="fixed top-0 inset-x-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+        <div class="nav-shell rounded-full flex justify-between items-center gap-4 pl-5 pr-2 md:pl-8 md:pr-3 xl:pr-3 py-2">
+            <a href="#top" class="nav-brand flex flex-col justify-center group min-w-0" aria-label="Ηλίας Τσάλλης, Ψυχολόγος · Συστημικός Ψυχοθεραπευτής — αρχή της σελίδας">
+                <span class="font-serif text-[17px] md:text-xl tracking-[0.1em] text-brand-dark uppercase leading-none mb-1 group-hover:text-brand-forest transition-colors">Ηλίας Τσάλλης</span>
+                <span class="nav-role text-brand-sage uppercase font-semibold leading-none">Ψυχολόγος · Συστημικός Ψυχοθεραπευτής</span>
             </a>
 
-            <div class="hidden lg:flex items-center gap-7 text-[13px] font-medium text-brand-text">
-                <a href="#top" class="hover:text-brand-forest transition-colors">Αρχική</a>
-                <a href="#about" class="hover:text-brand-forest transition-colors">Γνωρίστε με</a>
-                <a href="#help" class="hover:text-brand-forest transition-colors">Πώς βοηθώ</a>
-                <a href="#sessions" class="hover:text-brand-forest transition-colors">Συνεδρίες</a>
-                <a href="#approach" class="hover:text-brand-forest transition-colors">Η προσέγγισή μου</a>
-                <a href="#space" class="hover:text-brand-forest transition-colors">Ο χώρος μου</a>
-                <a href="#contact" class="px-5 py-2.5 bg-brand-dark text-white rounded-full text-[11px] font-bold uppercase tracking-[0.15em] hover:bg-brand-forest transition-colors">Επικοινωνία</a>
+            <div class="hidden xl:flex items-center gap-6 text-[13px] font-medium text-brand-text">
+                <a href="#top" class="nav-link" data-spy="top">Αρχική</a>
+                <a href="#about" class="nav-link" data-spy="about">Γνωρίστε με</a>
+                <a href="#help" class="nav-link" data-spy="help">Πώς βοηθώ</a>
+                <a href="#sessions" class="nav-link" data-spy="sessions">Συνεδρίες</a>
+                <a href="#approach" class="nav-link" data-spy="approach">Η θεραπευτική μου προσέγγιση</a>
+                <a href="#space" class="nav-link" data-spy="space">Ο χώρος μου</a>
+                <a href="#contact" class="nav-cta" data-spy="contact">Επικοινωνία</a>
             </div>
 
-            <button id="menu-btn" class="lg:hidden w-10 h-10 flex items-center justify-center text-brand-dark" aria-label="Μενού" aria-expanded="false" aria-controls="mobile-menu">
+            <button id="menu-btn" class="xl:hidden w-11 h-11 rounded-full flex items-center justify-center text-brand-dark" aria-label="Μενού" aria-expanded="false" aria-controls="mobile-menu">
                 <svg id="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
             </button>
         </div>
     </div>
 </nav>
 
-<div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-brand-beige flex-col items-center justify-center gap-2 text-center px-8">
-    <a href="#top" class="mobile-link font-serif text-3xl py-2 text-brand-dark">Αρχική</a>
-    <a href="#about" class="mobile-link font-serif text-3xl py-2 text-brand-dark">Γνωρίστε με</a>
-    <a href="#help" class="mobile-link font-serif text-3xl py-2 text-brand-dark">Πώς βοηθώ</a>
-    <a href="#sessions" class="mobile-link font-serif text-3xl py-2 text-brand-dark">Συνεδρίες</a>
-    <a href="#approach" class="mobile-link font-serif text-3xl py-2 text-brand-dark">Η θεραπευτική μου προσέγγιση</a>
-    <a href="#space" class="mobile-link font-serif text-3xl py-2 text-brand-dark">Ο χώρος μου</a>
+<div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-brand-beige flex-col items-center justify-center gap-1 text-center px-8">
+    <a href="#top" class="mobile-link font-serif text-3xl py-2 text-brand-dark" data-spy="top">Αρχική</a>
+    <a href="#about" class="mobile-link font-serif text-3xl py-2 text-brand-dark" data-spy="about">Γνωρίστε με</a>
+    <a href="#help" class="mobile-link font-serif text-3xl py-2 text-brand-dark" data-spy="help">Πώς βοηθώ</a>
+    <a href="#sessions" class="mobile-link font-serif text-3xl py-2 text-brand-dark" data-spy="sessions">Συνεδρίες</a>
+    <a href="#approach" class="mobile-link font-serif text-3xl py-2 text-brand-dark" data-spy="approach">Η θεραπευτική μου προσέγγιση</a>
+    <a href="#space" class="mobile-link font-serif text-3xl py-2 text-brand-dark" data-spy="space">Ο χώρος μου</a>
     <a href="#contact" class="mobile-link mt-6 px-10 py-4 bg-brand-dark text-white rounded-full text-sm font-bold uppercase tracking-widest">Επικοινωνία</a>
 </div>
 
+<style>
+    /* the bar: transparent over the hero, frosted once the visitor scrolls */
+    #navbar{ padding-block:.75rem; transition:padding .35s cubic-bezier(.16,1,.3,1); }
+    .nav-shell{ border:1px solid transparent; transition:background-color .35s ease, border-color .35s ease, box-shadow .35s ease; }
+    #navbar.is-scrolled{ padding-block:.5rem; }
+    #navbar.is-scrolled .nav-shell{
+        background:rgba(244,241,234,.9); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+        border-color:rgba(232,225,213,.9); box-shadow:0 14px 34px -16px rgba(44,51,42,.22);
+    }
+    /* small name: hidden while the big hero name is on screen, so the name never appears twice */
+    .nav-brand{ opacity:0; visibility:hidden; transform:translateY(6px);
+        transition:opacity .45s cubic-bezier(.16,1,.3,1), transform .45s cubic-bezier(.16,1,.3,1), visibility 0s linear .45s; }
+    #navbar.show-brand .nav-brand{ opacity:1; visibility:visible; transform:none; transition-delay:0s; }
+    .nav-role{ font-size:8px; letter-spacing:.1em; }
+    @media (min-width:768px){ .nav-role{ font-size:9px; letter-spacing:.16em; } }
+
+    .nav-link{ position:relative; color:#4A5048; text-decoration:none; padding-block:.35rem; transition:color .25s; white-space:nowrap; }
+    .nav-link::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:1px; background:#5E6D5B;
+        transform:scaleX(0); transform-origin:left; transition:transform .35s cubic-bezier(.16,1,.3,1); }
+    .nav-link:hover, .nav-link.is-active{ color:#2C332A; }
+    .nav-link.is-active::after{ transform:scaleX(1); }
+    @media (hover:hover){ .nav-link:hover::after{ transform:scaleX(1); } }
+    .nav-cta{ padding:.7rem 1.3rem; background:#2C332A; color:#fff; border-radius:9999px; font-size:11px; font-weight:700;
+        text-transform:uppercase; letter-spacing:.15em; text-decoration:none; white-space:nowrap; transition:background-color .25s; }
+    .nav-cta:hover, .nav-cta.is-active{ background:#5E6D5B; }
+    .mobile-link.is-active:not(.bg-brand-dark){ color:#5E6D5B; font-style:italic; }
+    #menu-btn:hover{ background:rgba(143,158,139,.14); }
+
+    /* photo + membership badge on its bottom edge (as in his PDF) */
+    .hero-badge{
+        position:absolute; left:50%; bottom:0; transform:translate(-50%,50%); white-space:nowrap;
+        display:inline-flex; align-items:center; gap:.55rem; padding:.7rem 1.35rem; border-radius:9999px;
+        background:#fff; border:1px solid #E8E1D5; color:#5E6D5B;
+        font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+        box-shadow:0 18px 36px -14px rgba(44,51,42,.28);
+    }
+    .hero-kicker{ display:flex; align-items:center; justify-content:center; gap:.9rem; }
+    .hero-kicker::before, .hero-kicker::after{ content:""; width:1.25rem; height:1px; background:#8F9E8B; opacity:.6; }
+    @media (min-width:768px){ .hero-kicker::before, .hero-kicker::after{ width:2.25rem; } }
+</style>
+
 <!-- ================= HERO ================= -->
-<!-- plain single colour, no arch, no faded photo behind the words -->
-<header id="top" class="bg-brand-beige pt-32 lg:pt-40 pb-20 lg:pb-24 px-6">
+<!-- plain single colour, no arch, no faded photo behind the words — order exactly as in his PDF -->
+<header id="top" class="bg-brand-beige pt-28 md:pt-32 lg:pt-36 pb-20 lg:pb-24 px-6">
     <div class="max-w-3xl mx-auto text-center">
 
-        <p class="rv text-[11px] md:text-xs font-semibold uppercase tracking-[0.28em] text-brand-sage mb-6">
-            Ψυχοθεραπεία &amp; Συμβουλευτική
-        </p>
-
-        <h1 class="rv rv-1 font-serif text-4xl md:text-6xl text-brand-dark leading-[1.08] mb-4">
+        <h1 id="hero-name" class="rv font-serif text-[2.6rem] md:text-6xl text-brand-dark leading-[1.08] mb-5">
             Ηλίας Τσάλλης<span class="block text-2xl md:text-3xl mt-3 text-brand-forest">BSc, MBPsS</span>
         </h1>
 
-        <p class="rv rv-1 text-brand-text text-base md:text-lg font-light leading-relaxed mb-1">Ψυχολόγος · Συστημικός Ψυχοθεραπευτής</p>
-        <p class="rv rv-1 text-brand-sage text-sm md:text-base font-medium tracking-wide mb-10">Ιδιωτικό γραφείο Περιστέρι</p>
+        <p class="rv rv-1 text-brand-text text-lg md:text-xl font-light leading-snug mb-3">Ψυχολόγος<br>Συστημικός Ψυχοθεραπευτής</p>
+        <p class="rv rv-1 text-brand-sage text-sm md:text-base font-medium tracking-wide mb-8">Ιδιωτικό γραφείο Περιστέρι</p>
 
-        <div class="rv rv-2 img-wrapper rounded-3xl shadow-deep mx-auto mb-10 max-w-[420px]">
-            <img src="ilias-1.webp" alt="Ηλίας Τσάλλης, Ψυχολόγος και Συστημικός Ψυχοθεραπευτής"
-                 width="558" height="800" fetchpriority="high" decoding="async" class="w-full h-auto">
-        </div>
+        <p class="rv rv-2 hero-kicker text-[10.5px] md:text-xs font-semibold uppercase tracking-[0.16em] md:tracking-[0.28em] text-brand-forest whitespace-nowrap mb-6">
+            Ψυχοθεραπεία &amp; Συμβουλευτική
+        </p>
 
-        <p class="rv rv-2 text-brand-text text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto mb-4">
+        <p class="rv rv-2 text-brand-text text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto mb-12">
             Δημιουργούμε μαζί έναν χώρο απόλυτης αποδοχής. Εδώ, κάθε συναίσθημα αποκτά φωνή
             και κάθε πρόκληση γίνεται το θεμέλιο για την ουσιαστική σας εξέλιξη.
         </p>
 
-        <p class="rv rv-2 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-forest bg-white/70 border border-brand-sand rounded-full px-5 py-2.5 mb-12">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6.5v5c0 4.6 3.4 8.4 8 9.5 4.6-1.1 8-4.9 8-9.5v-5L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
-            Μέλος BPS &amp; ΕΛΕΣΥΘ
-        </p>
+        <div class="rv rv-2 relative mx-auto mb-16 max-w-[420px]">
+            <div class="img-wrapper rounded-3xl shadow-deep">
+                <img src="ilias-1.webp" alt="Ηλίας Τσάλλης, Ψυχολόγος και Συστημικός Ψυχοθεραπευτής"
+                     width="558" height="800" fetchpriority="high" decoding="async" class="w-full h-auto">
+            </div>
+            <p class="hero-badge">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6.5v5c0 4.6 3.4 8.4 8 9.5 4.6-1.1 8-4.9 8-9.5v-5L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+                Μέλος BPS &amp; ΕΛΕΣΥΘ
+            </p>
+        </div>
 
         <!-- the 1-2-1 button block -->
         <div class="rv rv-3 max-w-xl mx-auto space-y-3">
@@ -483,7 +534,7 @@
     }
     .appr-card:hover{ transform:translateY(-4px); background:rgba(255,255,255,.07); border-color:rgba(143,158,139,.55); }
     .appr-card .n{ display:block; font-size:.68rem; letter-spacing:.24em; color:#8F9E8B; font-weight:600; margin-bottom:.9rem; }
-    .appr-card h3{ font-family:"Cormorant Garamond",Georgia,serif; font-size:1.5rem; color:#fff; margin:0 0 .75rem; line-height:1.25; }
+    .appr-card h3{ font-family:"EB Garamond",Georgia,serif; font-size:1.5rem; color:#fff; margin:0 0 .75rem; line-height:1.25; }
     .appr-card h3 em{ font-style:italic; font-size:.8em; color:rgba(255,255,255,.6); }
     .appr-card p{ margin:0; font-weight:300; line-height:1.7; color:rgba(255,255,255,.72); font-size:.96rem; }
 </style>
@@ -585,10 +636,10 @@
 <!-- ================= FOOTER ================= -->
 <footer class="bg-white border-t border-brand-sand py-12 px-6">
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5 text-center md:text-left">
-        <div>
-            <div class="font-serif text-xl tracking-[0.12em] text-brand-dark uppercase">Ηλίας Τσάλλης</div>
+        <a href="#top" class="block group" aria-label="Ηλίας Τσάλλης — αρχή της σελίδας">
+            <div class="font-serif text-xl tracking-[0.12em] text-brand-dark uppercase group-hover:text-brand-forest transition-colors">Ηλίας Τσάλλης</div>
             <div class="text-[10px] tracking-[0.25em] text-brand-sage uppercase font-semibold mt-1">Ψυχολόγος · Συστημικός Ψυχοθεραπευτής</div>
-        </div>
+        </a>
         <p class="text-brand-text/70 text-sm font-light">© <span id="yr">2026</span> Ηλίας Τσάλλης. Όλα τα δικαιώματα διατηρούνται.</p>
         <p class="text-brand-text/70 text-sm font-light">
             Κατασκευή <a href="https://advonmedia.com" target="_blank" rel="noopener" class="text-brand-dark font-semibold uppercase tracking-wider text-[0.7rem] hover:text-brand-forest transition-colors">Advon Media</a>
@@ -652,12 +703,41 @@
         a.addEventListener('click', function () { setMenu(false); });
     });
 
-    /* navbar shadow on scroll */
-    var nav = document.getElementById('navbar');
+    /* fixed bar: frosted once the big name reaches it, small name appears once the big name is gone */
+    var nav = document.getElementById('navbar'),
+        heroName = document.getElementById('hero-name'),
+        ticking = false;
+    function navState() {
+        ticking = false;
+        var barBottom = nav.firstElementChild.getBoundingClientRect().bottom,
+            r = heroName.getBoundingClientRect();
+        nav.classList.toggle('is-scrolled', r.top < barBottom + 8);
+        nav.classList.toggle('show-brand', r.bottom < barBottom);
+    }
     window.addEventListener('scroll', function () {
-        nav.classList.toggle('py-2', window.scrollY > 40);
-        nav.classList.toggle('py-4', window.scrollY <= 40);
+        if (!ticking) { ticking = true; requestAnimationFrame(navState); }
     }, { passive: true });
+    window.addEventListener('resize', navState);
+    navState();
+
+    /* the menu underlines the section the visitor is reading */
+    var spyLinks = Array.prototype.slice.call(document.querySelectorAll('[data-spy]'));
+    function setActive(id) {
+        spyLinks.forEach(function (a) {
+            var on = a.getAttribute('data-spy') === id;
+            a.classList.toggle('is-active', on);
+            if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        });
+    }
+    if ('IntersectionObserver' in window) {
+        var spy = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); });
+        }, { rootMargin: '-45% 0px -54% 0px' });
+        ['top', 'about', 'help', 'sessions', 'approach', 'space', 'contact'].forEach(function (id) {
+            var el = document.getElementById(id); if (el) spy.observe(el);
+        });
+    }
+    setActive('top');
 
     /* reveal — with a fail-safe pass so nothing can stay invisible */
     var items = Array.prototype.slice.call(document.querySelectorAll('.rv'));
